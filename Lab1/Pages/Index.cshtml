@@ -1,0 +1,67 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Statistics</h1>
+    <p class="mb-4">Enter one, two or three numerical numbers and click the Calculate button to get their statistics.</p>
+    </div>
+    <form method="post">
+    <div class="container">
+        <div class="form-group row pb-2">
+         <label for="firstNumber" class="col-sm-2 offset-md-3 col-form-label fw-bold">First Number:</label>
+            <div class="col-sm-3">
+                <input type="text" asp-for="FirstNumber" name="firstNumber" class="form-control">
+            </div>
+    </div>
+    <div class="form-group row pb-2">
+        <label for="secondNumber" class="col-sm-2 offset-md-3 col-form-label fw-bold">Second Number:</label>
+            <div class="col-sm-3">
+                <input type="text" asp-for="SecondNumber" name="secondNumber" class="form-control">
+            </div>
+    </div>
+    <div class="form-group row pb-2">
+        <label for="thirdNumber" class="col-sm-2 offset-md-3 col-form-label fw-bold">Third Number:</label>
+            <div class="col-sm-3">
+                <input type="text" asp-for="ThirdNumber" name="thirdNumber" class="form-control">
+            </div>
+    </div>
+    <div class="form-group row pb-2">
+        <div class="col-sm-5 offset-md-3">
+            <button type="submit" class="btn btn-primary">Calculate</button>
+        </div>
+    </div>
+    </div>
+    </form>
+        @if (Model.numberList.Count != 0)
+        {
+            <div class="text-center mt-4 mb-4 fw-bold">
+            <p>@($"You have entered {Model.numberList.Count()} number(s). The following are their statistics.") </p>
+            </div>
+            <div class="container">
+                <div class="form-group row">
+                    <label class="col-sm-2 offset-sm-3 col-form-label fw-bold">Maximum =</label>
+                    <label class="col-sm-1 col-form-label font-weight-bold">@($"{Model.MaxAmount:F2}")</label>             
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 offset-sm-3 col-form-label fw-bold">Minimum =</label>
+                    <label class="col-sm-1 col-form-label font-weight-bold">@($"{Model.MinAmount:F2}")</label> 
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 offset-sm-3 col-form-label fw-bold">Total =</label>
+                    <label class="col-sm-1 col-form-label font-weight-bold">@($"{Model.TotalAmount:F2}")</label> 
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 offset-sm-3 col-form-label fw-bold">Average =</label>
+                    <label class="col-sm-1 col-form-label font-weight-bold">@($"{Model.AvgAmount:F2}")</label> 
+                </div>
+                </div>
+        }
+        @if (Model.numberList.Count == 0)
+        {
+            <div class="text-center mt-4 mb-4 fw-bold">
+            <p>@($"{Model.ErrorMessage}")</p>
+            </div>
+        }
